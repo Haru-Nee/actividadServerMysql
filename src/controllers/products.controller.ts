@@ -23,8 +23,6 @@ interface ProductBody {
 }
 
 export class ProductController {
-
-  // GET /api/v1/products/getAll
   async getAll(_req: Request, res: Response): Promise<void> {
     try {
       const [rows] = await pool.query<Product[]>("SELECT * FROM products WHERE active = TRUE");
@@ -34,7 +32,6 @@ export class ProductController {
     }
   }
 
-  // GET /api/v1/products/getById/:id
   async getById(req: Request, res: Response): Promise<void> {
     try {
       const id = +req.params.id!;
@@ -59,7 +56,6 @@ export class ProductController {
     }
   }
 
-  // POST /api/v1/products/create
   async createProduct(req: Request<{}, {}, ProductBody>, res: Response): Promise<void> {
     try {
       const { name, price, stock, description, brand, img } = req.body;
@@ -86,7 +82,6 @@ export class ProductController {
     }
   }
 
-  // PUT /api/v1/products/update/:id
   async updateProduct(req: Request<{ id: string }, {}, ProductBody>, res: Response): Promise<void> {
     try {
       const id = +req.params.id!;
@@ -119,7 +114,6 @@ export class ProductController {
     }
   }
 
-  // DELETE /api/v1/products/delete/:id (Baja Lógica)
   async deleteProduct(req: Request<{ id: string }>, res: Response): Promise<void> {
     try {
       const id = +req.params.id!;
@@ -144,7 +138,6 @@ export class ProductController {
     }
   }
 
-  // PATCH /api/v1/products/change-price/:id
   async changePrice(req: Request<{ id: string }, {}, { price?: number | string }>, res: Response): Promise<void> {
     try {
       const id = +req.params.id!;
